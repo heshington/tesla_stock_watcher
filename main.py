@@ -1,8 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 import os
-from dotenv import load_dotenv, find_dotenv
-load_dotenv()
+
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 
@@ -14,17 +13,15 @@ parameters = {
     "function": "TIME_SERIES_DAILY",
     "symbol": STOCK,
     "interval": "60min",
-    "apikey": "L648408R1ZVSCQQ8"
+    "apikey": ""
 }
-# replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
 response = requests.get('https://www.alphavantage.co/query?', params=parameters)
 data = response.json()
-# print(data)
-today_date = datetime.now()
+
+today_date = datetime.today().strftime('%Y-%m-%d')
 yesterday = datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
 day_before_yesterday = datetime.strftime(datetime.now() - timedelta(2), '%Y-%m-%d')
-# print(yesterday)
-# print(day_before_yesterday)
+
 
 yesterday_close_price = data['Time Series (Daily)'][yesterday]['4. close']
 yesterday_close_price = float(yesterday_close_price)
@@ -38,6 +35,24 @@ if abs(difference) > 5:
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+## Get Tesla news
+news_parameters = {
+    'q':'Tesla',
+    'from': today_date,
+    'sortBy': 'popularity',
+    'apiKey': ''
+
+}
+news_response = requests.get('https://newsapi.org/v2/everything?', params=news_parameters)
+news_data = news_response.json()
+
+news_articles = news_data['articles']
+first_three_articles = []
+for i in range(3):
+    first_three_articles.append(news_articles[i])
+print(len(first_three_articles))
+
+
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
