@@ -37,6 +37,9 @@ try:
         print("Get News")
     print(f"The differnce in price is {difference}")
 
+## STEP 2: Use https://newsapi.org
+# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+## Get Tesla news
     news_parameters = {
         'q': 'Tesla',
         'from': today_date,
@@ -96,9 +99,7 @@ except KeyError:
 
 
 
-## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
-## Get Tesla news
+
 
 
 # Optional: Format the SMS message like this:
