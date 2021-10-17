@@ -42,7 +42,6 @@ try:
         'from': today_date,
         'sortBy': 'relevancy',
         'language': 'en',
-        # 'apiKey': '8197c2e4fee34603a6681aa5b1d46889'
         'apiKey': config('NEWS_API')
     }
 
